@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz cumpleaños, Sabri 💗</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: "Georgia", serif;
+      background: linear-gradient(135deg, #2b1028, #711c50, #bd477a);
+      color: #fff0f6;
+    }
+
+    .card {
+      width: 90%;
+      max-width: 430px;
+      padding: 40px 25px;
+      text-align: center;
+      border: 1px solid #ffc4df66;
+      border-radius: 25px;
+      background: #ffffff12;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 50px #ff83bc30;
+      animation: appear 1.5s ease;
+      z-index: 2;
+    }
+
+    .small-title {
+      font-family: sans-serif;
+      font-size: 12px;
+      letter-spacing: 5px;
+      color: #ffc4df;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(30px, 8vw, 42px);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .heart {
+      font-size: 95px;
+      display: inline-block;
+      margin: 10px 0 20px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 20px #ff80b5);
+      animation: heartbeat 1.2s infinite;
+      user-select: none;
+    }
+
+    .message {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #ffe2ef;
+    }
+
+    .signature {
+      margin-top: 25px;
+      font-size: 18px;
+      font-style: italic;
+      color: #ffb6d7;
+    }
+
+    .hint {
+      margin-top: 24px;
+      font: 11px sans-serif;
+      letter-spacing: 1px;
+      color: #ffd2e6a8;
+    }
+
+    .floating {
+      position: absolute;
+      bottom: -40px;
+      color: #ffb8d6;
+      opacity: 0.65;
+      animation: float-up linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.16); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float-up {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% { opacity: 0.65; }
+      to {
+        transform: translateY(-115vh) rotate(35deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+    <p class="small-title">UN DÍA ESPECIAL ♡</p>
+
+    <h1>Feliz cumpleaños,<br>Sabriiii 💗</h1>
+
+    <div class="heart" id="heart" title="Tócame">💗</div>
+
+    <p class="message">
+      Espero que tengas un día hermoso.<br>
+      Te mereces todo lo bueno del mundo.<br>
+      Gracias por tu linda amistad.<br>
+      Ojalá sigamos siendo amigas<br>
+      por muchísimos años más. 🥹
+    </p>
+
+    <p class="signature">Te quiero mucho ♡</p>
+
+    <p class="hint">♡ TOCA EL CORAZÓN ♡</p>
+  </main>
+
+  <script>
+    const heart = document.getElementById("heart");
+
+    heart.addEventListener("click", () => {
+      heart.textContent = heart.textContent === "💗" ? "💖" : "💗";
+
+      for (let i = 0; i < 12; i++) {
+        const spark = document.createElement("span");
+        spark.textContent = ["♡", "♥", "✨", "💕"][
+          Math.floor(Math.random() * 4)
+        ];
+
+        spark.style.position = "fixed";
+        spark.style.left = (heart.getBoundingClientRect().left +
+          heart.offsetWidth / 2) + "px";
+        spark.style.top = (heart.getBoundingClientRect().top + 20) + "px";
+        spark.style.pointerEvents = "none";
+        spark.style.fontSize = (16 + Math.random() * 18) + "px";
+        spark.style.zIndex = "10";
+        spark.style.transition = "transform 1s ease, opacity 1s ease";
+
+        document.body.appendChild(spark);
+
+        requestAnimationFrame(() => {
+          spark.style.transform =
+            `translate(${(Math.random() - 0.5) * 240}px, ${-60 - Math.random() * 160}px)`;
+          spark.style.opacity = "0";
+        });
+
+        setTimeout(() => spark.remove(), 1100);
+      }
+    });
+
+    // Corazones flotando de fondo
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.className = "floating";
+      heart.textContent = ["♡", "♥", "୨୧"][Math.floor(Math.random() * 3)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (15 + Math.random() * 20) + "px";
+      heart.style.animationDuration = (6 + Math.random() * 7) + "s";
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 13000);
+    }
+
+    setInterval(createHeart, 450);
+  </script>
+
+</body>
+</html>
